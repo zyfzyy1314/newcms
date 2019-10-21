@@ -9,7 +9,7 @@ class Project extends Model
     //
 
     public function user(){
-
-        return $this->belongsTo('APP\User','user_id');
+//关联
+        return $this->belongsTo('APP\User','user_ids');
     }
 }
