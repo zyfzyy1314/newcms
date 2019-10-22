@@ -12,20 +12,20 @@
       </div>
       <div class="modal-body">
 
-          <form action="{{route('projects.store')}}" method="post">
+          <form action="{{route('projects.store')}}" method="post" enctype="multipart/form-data">
             @csrf
               <div class="form-group">
-                <label for="creatModalInputEmail1">新建项目</label>
-                <input type="text" class="form-control" id="creatModalInputEmail1" placeholder="项目名称">
+                <label for="creatModalInput">新建项目</label>
+                <input type="text" class="form-control" id="creatModalInput"  name='project_name' placeholder="项目名称">
               </div>
 
               <div class="form-group">
-                <input type="file" id="creatModalInputFile">
+                <input type="file" id="creatModalInputFile" name='project_thumbnail'>
               </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <input type="submit" class="btn btn-primary" value="Save changes">
+        <input type="submit" class="btn btn-primary" value="Add">
       </div>
 
 

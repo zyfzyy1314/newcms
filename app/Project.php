@@ -8,8 +8,13 @@ class Project extends Model
 {
     //
 
+    protected $fillable = [
+        'name', 'thumbnail', 'user_id',
+    ];
+
+
     public function user(){
 //关联
-        return $this->belongsTo('APP\User','user_id');
+        return $this->belongsTo('App\User','user_id');
     }
 }
