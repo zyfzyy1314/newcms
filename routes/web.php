@@ -11,11 +11,25 @@
 |
 */
 
-Route::get('/', 'HomeController@root');
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 #Route::post('projects','ProjectsController@store')->name('projects.store');
+
+Route::get('/', 'ProjectsController@index')->name('projects.index');
+
 Route::post('projects',['uses'=>'ProjectsController@store','as'=>'projects.store']);
 
+Route::match(['delete'],'/projects/{project}', [
+    'as' => 'projects.destroy', 'uses' => 'ProjectsController@destory'
+]);
+
+Route::match(['PATCH'],'/projects/{project}', [
+    'as' => 'projects.update', 'uses' => 'ProjectsController@update'
+]);
+
+Route::get('/projects/{project}',['uses'=>'ProjectsController@show','as'=>'projects.show']);
+
+Route::resource('tasks', 'TasksController');

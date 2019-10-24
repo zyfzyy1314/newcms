@@ -4,48 +4,55 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
-use Image;
+use App\Repositories\ProjectsRepository;
+use App\Http\Requests\createProjectRequest;
+use App\Http\Requests\editProjectRequest;
+
 
 class ProjectsController extends Controller
 {
-    //
-        public function store(Request $request){
+       
+    
+       protected $repo;
+              
+       public function __construct(ProjectsRepository $repo)
+       {
+            $this->repo = $repo;
+            $this->middleware('auth');
+       }
+       
 
-            $request->user()->projects()->create([
-                'name' => $request->project_name,
-                'thumbnail' =>$this->thumb($request)
-            ]);
-  
-/*
-            Project::create([
-                'name' => $request->project_name,
-                'thumbnail' =>$request->project_thumbnail,     
-                'user_id' =>$request->user()->id              
-            ]);
+       public function index()
+       {
+            $projects=$this->repo->list();
+            return view('welcome',compact('projects'));
+       }
 
-*/
-            
+       public function show($id)
+       {
+           $projects = $this->repo->find($id);
+           return view('projects.show',compact('projects'));
+       }
+
+        public function store(createProjectRequest $request)
+        {
+            $this->repo->create($request); 
+            return back();
         }
 
-        public function thumb($request){
+        public function destory($id)
+        {
 
-            if($request->hasFile('project_thumbnail')){
-                $thumb = $request->project_thumbnail;
-                $name = $thumb->hashName();
-                $thumb ->storeAs('public/thumbs/orihinal',$name);
-
-                $path = storage_path('app/public/thumbs/cropped/'.$name);
-
-                Image::make($thumb)->resize(200,90)->save($path);
-
-                return $name;
-
-            }
-
-
-
+            $this->repo->delete($id);
+            return back();
         }
 
+        public function update($id,editProjectRequest $request)
+        {
+            $this->repo->update($id,$request); 
+            return back();
+        }
+        
         
 
 

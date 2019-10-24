@@ -23,17 +23,22 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         return view('home');
     }
-
+/*
     public function root()
     {
-        return view('welcome');
+
+        $projects = request()->user()->projects()->get();
+
+        return view('welcome',compact('projects'));
+        
         
     }
-
+    */
 
 
 }
