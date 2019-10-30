@@ -69,6 +69,17 @@ class ProjectsRepository
         $project->save();
     }
 
+    public function todo($project)
+    {
+        return $project->tasks()->where('complete',0)->get();
+    }
+
+    public function done($project)
+    {
+        return $project->tasks()->where('complete',1)->get();
+
+    }
+
 
     public function delete($id){
 

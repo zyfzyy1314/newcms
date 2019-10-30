@@ -21,11 +21,11 @@
                     </li>
 
                 </ul>
-                <a href="projects/{{$project->id}}">
-                    <img src="{{asset('storage/thumbs/cropped/'.$project->thumbnail)}}" class="card-img-top" alt="...">
+                <a href="{{route('projects.show',$project->id)}}">
+                    <img src="{{asset('storage/thumbs/cropped/'.$project->thumbnail)}}" class="card-img-top">
                 </a>
                 <div class="card-body">
-                    <a href="projects/{{$project->id}}">
+                        <a href="{{route('projects.show',$project->id)}}">
                         <h6 class="card-title">  {{ $project->name }}</h6>
                 </a>
                 </div>

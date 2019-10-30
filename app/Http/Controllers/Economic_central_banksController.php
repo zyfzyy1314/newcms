@@ -1,23 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Repositories\TasksRepository;
+
 use Illuminate\Http\Request;
-use App\Project;
-use App\Task;
+use App\Economic_central_banks;
 
-class TasksController extends Controller
+class Economic_central_banksController extends Controller
 {
-    
-    protected $repo;
-
-    public function __construct(TasksRepository $repo)
-    {
-        $this->repo = $repo;
-        $this->middleware('auth');
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -26,8 +15,21 @@ class TasksController extends Controller
     public function index()
     {
         //
-            #dd(auth()->user()->remember_token);
-
+      //  $news = Economic_central_banks::all();
+        
+      //  return view('',);
+        
+      $world =  Economic_central_banks::all();
+      $americas = Economic_central_banks::where('area','americas')->get();
+      $europe = Economic_central_banks::where('area','europe')->get();
+      $asia_pacific = Economic_central_banks::where('area','asia-pacific')->get();
+      $middle_east = Economic_central_banks::where('area','middle-east')->get();
+      $africa = Economic_central_banks::where('area','africa')->get();
+      $group_twenty = Economic_central_banks::where('group_twenty',1)->get();
+   
+     
+      return  view('economic_central_banks.show',compact('group_twenty','americas','europe','asia_pacific','middle_east','africa','world'));
+    
     }
 
     /**
@@ -38,8 +40,6 @@ class TasksController extends Controller
     public function create()
     {
         //
-
-
     }
 
     /**
@@ -50,8 +50,7 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $this->repo->create($request);
-        return back();
+        //
     }
 
     /**
@@ -60,10 +59,9 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(task $task)
+    public function show($id)
     {
-        
-        return view('tasks._showTask',compact('task'));
+        //
     }
 
     /**
@@ -77,14 +75,6 @@ class TasksController extends Controller
         //
     }
 
-
-    public function check($id)
-    {
-        $this->repo->check($id);
-        
-        return back();
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -94,9 +84,6 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
-        $this->repo->update($request,$id);
-        return back();
         //
     }
 
@@ -109,7 +96,5 @@ class TasksController extends Controller
     public function destroy($id)
     {
         //
-        $this->repo->delete($id);
-        return back();
     }
 }

@@ -7,7 +7,7 @@ use App\Project;
 use App\Repositories\ProjectsRepository;
 use App\Http\Requests\createProjectRequest;
 use App\Http\Requests\editProjectRequest;
-
+use Carbon\Carbon;
 
 class ProjectsController extends Controller
 {
@@ -28,11 +28,20 @@ class ProjectsController extends Controller
             return view('welcome',compact('projects'));
        }
 
-       public function show($id)
+       public function show(Project $project)
        {
-           $projects = $this->repo->find($id);
-           return view('projects.show',compact('projects'));
-       }
+          
+      #  return Carbon::now();
+        //$projects = $this->repo->find($id);
+        $todos = $this->repo->todo($project);
+        $dones = $this->repo->done($project);
+        $projects= request()->user()->projects()->pluck('name','id');
+
+      
+        return view('projects.show',compact('project','todos','dones','projects'));
+
+
+        }
 
         public function store(createProjectRequest $request)
         {

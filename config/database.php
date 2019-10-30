@@ -38,6 +38,9 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
         ],
+        
+
+
 
         'mysql' => [
             'driver' => 'mysql',
@@ -52,7 +55,13 @@ return [
             'prefix' => '',
             'strict' => true,
             'engine' => null,
+            
+
+
+
         ],
+
+        'dump_command_path' =>'D:\UPUPW_ANK_W64\Modules\MySQL\bin',
 
         'pgsql' => [
             'driver' => 'pgsql',

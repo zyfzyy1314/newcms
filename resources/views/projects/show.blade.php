@@ -3,10 +3,15 @@
 @section('content')
 
     <div class="container">
-         
-{{$projects->name}}        
+        
+        @include('tasks._createTaskForm')
+
+        @include('tasks._list')
+          
     </div>
 
+
+    
 @endsection
 
 

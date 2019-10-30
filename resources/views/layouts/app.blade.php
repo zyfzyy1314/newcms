@@ -25,6 +25,23 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                <a class="navbar-brand" href="{{ route('tasks.index')}}">
+                      @guest
+                            
+                      @else
+                            全部任务
+                      @endguest
+                    
+                </a>
+                <a class="navbar-brand" href="{{ route('economic_central_banks.index')}}">
+                    @guest
+                          
+                    @else
+                        央行利率
+                    @endguest
+                  
+              </a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -73,8 +90,22 @@
             @yield('content')
         </main>
     </div>
-    
+
+{{--          <footer class="footer mt-auto py-3"> 
+        <div class="container"> 
+            <span class="text-muted">
+              @guest
+                  hello
+                @else
+                共有項目{{$total}}， 未完成{{$todos}}，已完成{{$dones}}
+                @endguest  
+              
+            </span> 
+        </div> 
+    </footer>  --}}
+
     <script src="{{ asset('js/app.js') }}"></script>   
     @yield('customJs')
+
 </body>
 </html>

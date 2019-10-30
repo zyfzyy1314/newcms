@@ -33,3 +33,6 @@ Route::match(['PATCH'],'/projects/{project}', [
 Route::get('/projects/{project}',['uses'=>'ProjectsController@show','as'=>'projects.show']);
 
 Route::resource('tasks', 'TasksController');
+Route::post('/tasks/{task}/check',['uses'=>'TasksController@check','as'=>'tasks.check']);
+
+Route::resource('economic_central_banks', 'Economic_central_banksController');
